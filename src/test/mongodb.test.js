@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose')
 
-const connectString = 'mongodb+srv://hoanggghck:L9915173l@test.wf0nqom.mongodb.net/'
+const connectString = 'exmaple'
 
 const testSchema = new mongoose.Schema({ name: String })
 const Test = mongoose.model('Test', testSchema)
