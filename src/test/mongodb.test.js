@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose')
 
-const connectString = 'exmaple'
+const connectString = 'mongodb://localhost:27017'
 
 const testSchema = new mongoose.Schema({ name: String })
 const Test = mongoose.model('Test', testSchema)
