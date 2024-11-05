@@ -19,10 +19,28 @@ const messageService = {
         try {
             const { channel, connection } = await connectToRabbitMQ();
             const notiQueue = 'notificationQueueProcess'
+            // channel.consume( notiQueue, msg => {
+            //     console.log(`SEND notification successfully::`, msg.content.toString());
+            //     channel.ack(msg) //
+            // })
             channel.consume( notiQueue, msg => {
-                console.log(`SEND notification successfully::`, msg.content.toString());
-                channel.ack(msg) //
+                try {
+                    const numberTest = Math.random();
+                    console.log(numberTest);
+                    if (numberTest < 0.2) {
+                        throw new Error('send notification fail: HOT FIX')
+                    }
+
+                    console.log('send notification success', msg.content.toString());
+                    channel.ack(msg)
+                } catch (error) {
+                    channel.nack(msg, false, false)
+                    /* 
+                        nack: negative acknowledgement
+                    */
+                }
             })
+            
 
         } catch (error) {
             throw error;
